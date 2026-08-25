@@ -1,4 +1,4 @@
-package cl.duoc.dsy1105.lab;
+//package cl.duoc.dsy1105.lab;
 
 public class Laboratorio01Java {
 
@@ -16,8 +16,6 @@ public class Laboratorio01Java {
 
         if (propietario == null) {
             System.out.println("Propietario: Sin propietario");
-        } else {
-            System.out.println("Propietario: " + propietario);
         }
 
     }

@@ -1,4 +1,4 @@
-package cl.duoc.abpuente;
+//package cl.duoc.abpuente;
 
 
 public class Laboratorio01Java {
@@ -17,9 +17,7 @@ public class Laboratorio01Java {
 
         if (propietario == null) {
             System.out.println("Propietario: Sin propietario");
-        } else {
-            System.out.println("Propietario: " + propietario);
-        }
+        } 
 
     }
 
