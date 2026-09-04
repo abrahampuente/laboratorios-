@@ -39,3 +39,12 @@ data class Bicicleta(
     var disponible: Boolean = true,
     var mantenimiento: Int 
 )
+
+fun Registrar(bicicletas: MutableList<Bicicleta>) {
+    println("Ingrese el ID de la bicicleta: ")
+    val id = readlnOrNull()?.toIntOrNull()?: return println("Porfavor ingrese un ID válido")
+    println("Ingrese el tipo de bicicleta (eléctrica, montaña, ruta, urbana): ")
+    val tipo = readlnOrNull() ?: return println("Porfavor ingrese un tipo válido")
+    println("Ingrese la tarifa por hora: ")
+    val tarifa = readlnOrNull()?.toDoubleOrNull()?: return println("Porfavor ingrese una tarifa válida")
+}
