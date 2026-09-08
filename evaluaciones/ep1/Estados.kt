@@ -7,8 +7,8 @@ data class Registro(
     val total: Double
 )
 
-class local{
-    val slots = List(10) { index -> Slot(index+1)}
+class Local {
+    val slots = List(10) { index -> Slot(index + 1) }
 
     private val historial = mutableListOf<Registro>()
     var recaudacion: Double = 0.0
@@ -19,11 +19,11 @@ class local{
     fun entrada(bicicleta: Bicicleta){
         val slotLibre = slots.find { it.estado == EstadoSlot.LIBRE }
         if (slotLibre == null) {
-            println("No hay slots disponibles")
+            println("No hay slots disponibles.")
             return
         }
-        slotLibre.Proceso("Registrando entrada del codigo ${bicicleta.codigo}")
-        slotLibre.Ocupado(bicicleta)
+        slotLibre.proceso("Registrando entrada del codigo ${bicicleta.codigo}")
+        slotLibre.arrendar(bicicleta)
         println("Bicicleta ${bicicleta.codigo} ingresada en el slot ${slotLibre.id}")
     }
 
@@ -35,7 +35,7 @@ class local{
         }
 
         val bicicleta = slotOcupado.bicicleta!!
-        slotOcupado.Proceso("Calculando tarifa para la bicicleta ${bicicleta.codigo}")
+        slotOcupado.proceso("Calculando tarifa para la bicicleta ${bicicleta.codigo}")
         val total = bicicleta.Total(minutos)
         if (total <= 0 && minutos > 20) {
             println("No se puede calcular la tarifa para la bicicleta ${bicicleta.codigo}")
@@ -46,6 +46,18 @@ class local{
         recaudacion += total
         ticketCont++
 
-        slotOcupado.Liberar()
-        println("Bicicleta ${bicicleta.codigo} retirada del slot ${slotOcupado.id}. Total a pagar: $total")
+        slotOcupado.liberar()
+        println("Bicicleta ${bicicleta.codigo} retirada del slot ${slotOcupado.id}. Total a pagar: $${total.toInt()}")
+    }
+    
+    fun mostrarHistorial(){
+        if (historial.isEmpty()) {
+            println("No se han realizado arriendos el día de hoy.")
+            return
+        }
+        
+        historial.forEach { reg ->
+            println("Ticket #${reg.ticket.toString().padStart(4, '0')} | Bici: ${reg.bicicleta.codigo} (${reg.bicicleta.modelo}) | Tipo: ${reg.bicicleta::class.simpleName} | Cliente: ${reg.bicicleta.cliente} | Minutos: ${reg.minutos} min | Total: $${reg.total.toInt()}")
+        }
+    }
 }

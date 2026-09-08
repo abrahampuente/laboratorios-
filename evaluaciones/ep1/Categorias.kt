@@ -1,9 +1,9 @@
-class Clientes {
+enum class Clientes {
     TURISTA,
     ABONADO,
     DISCAPACITADO
 }
-class Slot {
+enum class EstadoSlot {
     LIBRE,
     ARRENDADA,
     PROCESO,
